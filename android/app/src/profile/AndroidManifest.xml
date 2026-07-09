@@ -1,0 +1,6 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application>
+        <!-- Profile mode uses release settings by default -->
+    </application>
+</manifest>
