@@ -26,29 +26,11 @@ android {
         versionName = "2.0.0"
     }
 
-    signingConfigs {
-        create("release") {
-            val ksBase64: String? = System.getenv("KEYSTORE_BASE64")
-            if (ksBase64 != null) {
-                storeFile = file("release.keystore")
-                storePassword = System.getenv("KEYSTORE_PASSWORD") ?: ""
-                keyAlias = System.getenv("KEY_ALIAS") ?: ""
-                keyPassword = System.getenv("KEY_PASSWORD") ?: ""
-            } else {
-                // Fallback to debug signing for CI builds without keystore
-                storeFile = file("debug.keystore")
-                storePassword = "android"
-                keyAlias = "androiddebugkey"
-                keyPassword = "android"
-            }
-        }
-    }
-
     buildTypes {
         release {
             isMinifyEnabled = false
             isShrinkResources = false
-            signingConfig = signingConfigs.getByName("release")
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
 
