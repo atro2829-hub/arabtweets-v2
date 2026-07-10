@@ -1,4 +1,4 @@
-import '../../../../../core/constants/api_constants.dart';
+import 'package:adentweet/core/constants/api_constants.dart';
 
 class ConversationModel {
   final String id;
