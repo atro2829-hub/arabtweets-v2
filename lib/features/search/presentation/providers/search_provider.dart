@@ -4,10 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../../../core/constants/api_constants.dart';
-import '../../../auth/data/models/user_model.dart';
-import '../../../tweets/data/models/tweet_model.dart';
-import '../../data/models/search_result.dart';
+import 'package:adentweet/core/constants/api_constants.dart';
+import 'package:adentweet/features/auth/data/models/user_model.dart';
+import 'package:adentweet/features/tweets/data/models/tweet_model.dart';
+import 'package:adentweet/features/search/data/models/search_result.dart';
 
 class SearchState {
   final String query;
@@ -92,7 +92,7 @@ class SearchNotifier extends StateNotifier<SearchState> {
       // Parse users
       final usersData = results[0] as List<dynamic>;
       for (final u in usersData) {
-        users.add(UserModel.fromMinimalJson(u as Map<String, dynamic>));
+        users.add(UserModel.fromJson(u as Map<String, dynamic>));
       }
 
       // Parse tweets

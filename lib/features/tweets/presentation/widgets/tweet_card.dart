@@ -6,9 +6,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:go_router/go_router.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:shimmer/shimmer.dart';
-import '../../../../core/constants/api_constants.dart';
-import '../../../data/models/tweet_model.dart';
-import '../providers/tweets_provider.dart';
+import 'package:adentweet/core/constants/api_constants.dart';
+import 'package:adentweet/features/tweets/data/models/tweet_model.dart';
+import 'package:adentweet/features/tweets/presentation/providers/tweets_provider.dart';
 import 'media_grid.dart';
 
 class TweetCard extends ConsumerStatefulWidget {

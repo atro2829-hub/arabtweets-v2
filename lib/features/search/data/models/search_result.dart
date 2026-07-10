@@ -1,5 +1,5 @@
-import '../../../auth/data/models/user_model.dart';
-import '../../../tweets/data/models/tweet_model.dart';
+import 'package:adentweet/features/auth/data/models/user_model.dart';
+import 'package:adentweet/features/tweets/data/models/tweet_model.dart';
 
 class SearchResult {
   final List<UserModel> users;

@@ -6,9 +6,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:toastification/toastification.dart';
 
-import '../../../../core/utils/validators.dart';
-import '../../../auth/data/models/user_model.dart';
-import '../providers/profile_provider.dart';
+import 'package:adentweet/core/utils/validators.dart';
+import 'package:adentweet/features/auth/data/models/user_model.dart';
+import 'package:adentweet/features/profile/presentation/providers/profile_provider.dart';
 
 class EditProfileScreen extends ConsumerStatefulWidget {
   final UserModel profile;
@@ -37,9 +37,9 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
     super.initState();
     _displayNameController.text = widget.profile.displayName;
     _usernameController.text = widget.profile.username;
-    _bioController.text = widget.profile.bio;
-    _locationController.text = widget.profile.location;
-    _websiteController.text = widget.profile.website;
+    _bioController.text = widget.profile.bio ?? '';
+    _locationController.text = widget.profile.location ?? '';
+    _websiteController.text = widget.profile.website ?? '';
     _avatarPreview = widget.profile.fullAvatarUrl;
     _coverPreview = widget.profile.fullCoverUrl;
   }

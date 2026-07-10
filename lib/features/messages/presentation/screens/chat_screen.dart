@@ -6,8 +6,8 @@ import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:video_player/video_player.dart';
-import '../../../data/models/message_model.dart';
-import '../providers/messages_provider.dart';
+import 'package:adentweet/features/messages/data/models/message_model.dart';
+import 'package:adentweet/features/messages/presentation/providers/messages_provider.dart';
 
 class ChatScreen extends ConsumerStatefulWidget {
   final String conversationId;
@@ -44,7 +44,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   final Map<String, VideoPlayerController> _videoControllers = {};
 
   String get _currentUserId =>
-      Supabase.instance.client.auth.currentUser?.id ?? '';
+      Supabase.instance.client.auth.currentUser?.id ?? ';
 
   @override
   void initState() {
@@ -758,7 +758,6 @@ class _MessageBubble extends StatelessWidget {
                         ? const Radius.circular(4)
                         : const Radius.circular(16),
                   ),
-                  clipBehavior: Clip.antiAlias,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,

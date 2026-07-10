@@ -28,7 +28,7 @@ class MessageModel {
   });
 
   String get senderFullAvatarUrl {
-    if (senderAvatarUrl == null || senderAvatarUrl!.isEmpty) return '';
+    if (senderAvatarUrl == null || senderAvatarUrl!.isEmpty) return ';
     return ApiConstants.getAvatarUrl(senderAvatarUrl!);
   }
 

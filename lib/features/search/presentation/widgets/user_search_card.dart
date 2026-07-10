@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../../auth/data/models/user_model.dart';
+import 'package:adentweet/features/auth/data/models/user_model.dart';
 
 class UserSearchCard extends StatefulWidget {
   final UserModel user;
@@ -169,10 +169,10 @@ class _UserSearchCardState extends State<UserSearchCard> {
                       color: theme.colorScheme.onSurfaceVariant,
                     ),
                   ),
-                  if (widget.user.bio.isNotEmpty) ...[
+                  if ((widget.user.bio ?? '').isNotEmpty) ...[
                     const SizedBox(height: 4),
                     Text(
-                      _truncateBio(widget.user.bio, 60),
+                      _truncateBio(widget.user.bio ?? '', 60),
                       style: theme.textTheme.bodySmall?.copyWith(
                         color: theme.colorScheme.onSurfaceVariant,
                         height: 1.3,

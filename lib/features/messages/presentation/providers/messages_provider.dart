@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import '../../../../core/constants/api_constants.dart';
-import '../../data/models/conversation_model.dart';
-import '../../data/models/message_model.dart';
+import 'package:adentweet/core/constants/api_constants.dart';
+import 'package:adentweet/features/messages/data/models/conversation_model.dart';
+import 'package:adentweet/features/messages/data/models/message_model.dart';
 
 final _client = () => Supabase.instance.client;
 
@@ -23,7 +23,7 @@ class ConversationsNotifier extends AsyncNotifier<List<ConversationModel>> {
 
   @override
   Future<List<ConversationModel>> build() async {
-    final userId = _currentUserIdProvider.read(ref);
+    final userId = ref.read(_currentUserIdProvider);
     if (userId == null) return [];
 
     ref.onDispose(() {
@@ -45,7 +45,7 @@ class ConversationsNotifier extends AsyncNotifier<List<ConversationModel>> {
   }
 
   Future<void> refresh() async {
-    final userId = _currentUserIdProvider.read(ref);
+    final userId = ref.read(_currentUserIdProvider);
     if (userId == null) return;
     state = const AsyncLoading();
     state = AsyncData(await _fetchConversations(userId));
@@ -53,7 +53,7 @@ class ConversationsNotifier extends AsyncNotifier<List<ConversationModel>> {
 
   /// Listen for new messages in real-time to update conversation list
   void listenForNewMessages() {
-    final userId = _currentUserIdProvider.read(ref);
+    final userId = ref.read(_currentUserIdProvider);
     if (userId == null) return;
 
     _channel?.unsubscribe();
@@ -65,7 +65,7 @@ class ConversationsNotifier extends AsyncNotifier<List<ConversationModel>> {
           schema: 'public',
           table: 'messages',
           callback: (payload) {
-            final newMessage = payload.new as Map<String, dynamic>?;
+            final newMessage = payload.newRecord as Map<String, dynamic>?;
             if (newMessage == null) return;
 
             final senderId = newMessage['sender_id'] as String?;
@@ -143,7 +143,7 @@ class MessagesNotifier
 
   @override
   Future<List<MessageModel>> build(String arg) async {
-    final userId = _currentUserIdProvider.read(ref);
+    final userId = ref.read(_currentUserIdProvider);
     if (userId == null) return [];
 
     _hasMore = true;
@@ -193,7 +193,7 @@ class MessagesNotifier
             value: conversationId,
           ),
           callback: (payload) {
-            final newMessageData = payload.new as Map<String, dynamic>?;
+            final newMessageData = payload.newRecord as Map<String, dynamic>?;
             if (newMessageData == null) return;
 
             final senderId = newMessageData['sender_id'] as String?;
@@ -239,7 +239,7 @@ class MessagesNotifier
     if (!_hasMore) return;
 
     final current = state.valueOrNull ?? [];
-    final userId = _currentUserIdProvider.read(ref);
+    final userId = ref.read(_currentUserIdProvider);
     if (userId == null) return;
 
     final olderMessages =
@@ -313,7 +313,7 @@ class MessagesNotifier
             ? 'mp3'
             : 'jpg';
 
-    final userId = _currentUserIdProvider.read(ref) ?? senderId;
+    final userId = ref.read(_currentUserIdProvider) ?? senderId;
     final storagePath =
         'messages/$userId/${DateTime.now().millisecondsSinceEpoch}.$ext';
 
@@ -336,7 +336,7 @@ class MessagesNotifier
 /// Provider to get or create a conversation with another user
 final createConversationProvider = FutureProvider.autoDispose
     .family<String, String>((ref, otherUserId) async {
-  final userId = _currentUserIdProvider.read(ref);
+  final userId = ref.read(_currentUserIdProvider);
   if (userId == null) throw Exception('Not authenticated');
 
   final conversationId = await _client()
@@ -351,7 +351,7 @@ final createConversationProvider = FutureProvider.autoDispose
 /// Provider for total unread message count across all conversations
 final unreadMessagesProvider =
     StreamProvider.autoDispose<int>((ref) {
-  final userId = _currentUserIdProvider.read(ref);
+  final userId = ref.read(_currentUserIdProvider);
   if (userId == null) return Stream.value(0);
 
   final controller = StreamController<int>.broadcast();

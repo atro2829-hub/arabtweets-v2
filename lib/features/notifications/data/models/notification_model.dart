@@ -46,7 +46,7 @@ class NotificationModel {
   });
 
   String get fromFullAvatarUrl {
-    if (fromAvatarUrl == null || fromAvatarUrl!.isEmpty) return '';
+    if (fromAvatarUrl == null || fromAvatarUrl!.isEmpty) return ';
     return ApiConstants.getAvatarUrl(fromAvatarUrl!);
   }
 

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:toastification/toastification.dart';
-import '../providers/auth_provider.dart';
-import '../../../../core/utils/validators.dart';
+import 'package:adentweet/features/auth/presentation/providers/auth_provider.dart';
+import 'package:adentweet/core/utils/validators.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -38,12 +38,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
     if (!mounted) return;
     final authState = ref.read(authProvider);
-    if (authState.value?.error != null) {
+    if (authState.error != null) {
       toastification.show(
         context: context,
         type: ToastificationType.error,
         title: const Text('خطأ'),
-        description: Text(authState.value!.error!),
+        description: Text(authState.error!),
         autoCloseDuration: const Duration(seconds: 4),
       );
     }
@@ -67,12 +67,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
     if (!mounted) return;
     final authState = ref.read(authProvider);
-    if (authState.value?.error != null) {
+    if (authState.error != null) {
       toastification.show(
         context: context,
         type: ToastificationType.error,
         title: const Text('خطأ'),
-        description: Text(authState.value!.error!),
+        description: Text(authState.error!),
         autoCloseDuration: const Duration(seconds: 4),
       );
     } else {
@@ -169,7 +169,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final authAsync = ref.watch(authProvider);
-    final isLoading = authAsync.value?.isLoading ?? false;
+    final isLoading = authAsync.isLoading;
 
     return Scaffold(
       appBar: AppBar(

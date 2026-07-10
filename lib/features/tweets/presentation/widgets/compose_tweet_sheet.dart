@@ -4,9 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import '../../../../core/constants/api_constants.dart';
-import '../../../data/models/tweet_model.dart';
-import '../providers/tweets_provider.dart';
+import 'package:adentweet/core/constants/api_constants.dart';
+import 'package:adentweet/features/tweets/data/models/tweet_model.dart';
+import 'package:adentweet/features/tweets/presentation/providers/tweets_provider.dart';
 import 'media_grid.dart';
 
 class ComposeTweetSheet extends ConsumerStatefulWidget {
@@ -389,9 +389,6 @@ class _ComposeTweetSheetState extends ConsumerState<ComposeTweetSheet> {
                             counterText: '',
                             contentPadding: EdgeInsets.only(top: 8),
                           ),
-                          onChanged: (value) {
-                            setState(() => _draftContent = value);
-                          },
                         ),
                       ),
                     ],

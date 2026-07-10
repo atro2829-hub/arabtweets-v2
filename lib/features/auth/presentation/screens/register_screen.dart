@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:toastification/toastification.dart';
-import '../providers/auth_provider.dart';
-import '../../../../core/utils/validators.dart';
+import 'package:adentweet/features/auth/presentation/providers/auth_provider.dart';
+import 'package:adentweet/core/utils/validators.dart';
 
 class RegisterScreen extends ConsumerStatefulWidget {
   const RegisterScreen({super.key});
@@ -45,15 +45,15 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
     if (!mounted) return;
     final authState = ref.read(authProvider);
-    if (authState.value?.error != null) {
+    if (authState.error != null) {
       toastification.show(
         context: context,
         type: ToastificationType.error,
         title: const Text('خطأ في التسجيل'),
-        description: Text(authState.value!.error!),
+        description: Text(authState.error!),
         autoCloseDuration: const Duration(seconds: 4),
       );
-    } else if (authState.value?.isSuccess == true) {
+    } else if (authState.isSuccess == true) {
       toastification.show(
         context: context,
         type: ToastificationType.success,
@@ -69,7 +69,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final authAsync = ref.watch(authProvider);
-    final isLoading = authAsync.value?.isLoading ?? false;
+    final isLoading = authAsync.isLoading;
 
     return Scaffold(
       appBar: AppBar(

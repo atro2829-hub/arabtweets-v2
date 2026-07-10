@@ -3,9 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:toastification/toastification.dart';
 
-import '../../../../core/utils/formatters.dart';
-import '../../../data/models/admin_models.dart';
-import '../providers/admin_provider.dart';
+import 'package:adentweet/core/utils/formatters.dart';
+import 'package:adentweet/features/admin/data/models/admin_models.dart';
+import 'package:adentweet/features/admin/presentation/providers/admin_provider.dart';
 
 class AdminDashboardScreen extends ConsumerStatefulWidget {
   const AdminDashboardScreen({super.key});

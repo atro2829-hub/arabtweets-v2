@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../../../core/constants/api_constants.dart';
-import '../../../tweets/presentation/widgets/tweet_card.dart';
-import '../../data/models/search_result.dart';
-import '../providers/search_provider.dart';
-import '../widgets/user_search_card.dart';
+import 'package:adentweet/core/constants/api_constants.dart';
+import 'package:adentweet/features/tweets/presentation/widgets/tweet_card.dart';
+import 'package:adentweet/features/search/data/models/search_result.dart';
+import 'package:adentweet/features/search/presentation/providers/search_provider.dart';
+import 'package:adentweet/features/search/presentation/widgets/user_search_card.dart';
 
 class SearchScreen extends ConsumerStatefulWidget {
   const SearchScreen({super.key});
@@ -233,11 +233,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen>
         final tweet = tweets[index];
         return TweetCard(
           tweet: tweet,
-          onLike: () {},
-          onRetweet: () {},
           onReply: () {},
-          onProfileTap: () {},
-          onShare: () {},
         );
       },
     );

@@ -83,7 +83,7 @@ class ProfileCardSkeleton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
         _SkeletonRect(width: double.infinity, height: 160),
         Padding(

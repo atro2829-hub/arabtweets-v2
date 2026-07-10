@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../app/theme/app_theme.dart';
-import '../../../data/models/conversation_model.dart';
-import '../providers/messages_provider.dart';
+import 'package:adentweet/app/theme/app_theme.dart';
+import 'package:adentweet/features/messages/data/models/conversation_model.dart';
+import 'package:adentweet/features/messages/presentation/providers/messages_provider.dart';
 
 class MessagesListScreen extends ConsumerStatefulWidget {
   const MessagesListScreen({super.key});
@@ -14,7 +14,7 @@ class MessagesListScreen extends ConsumerStatefulWidget {
 
 class _MessagesListScreenState extends ConsumerState<MessagesListScreen> {
   final TextEditingController _searchController = TextEditingController();
-  String _searchQuery = '';
+  String _searchQuery = ';
 
   @override
   void initState() {
@@ -31,7 +31,7 @@ class _MessagesListScreenState extends ConsumerState<MessagesListScreen> {
   }
 
   String _formatTime(DateTime? time) {
-    if (time == null) return '';
+    if (time == null) return ';
     final now = DateTime.now();
     final diff = now.difference(time);
 

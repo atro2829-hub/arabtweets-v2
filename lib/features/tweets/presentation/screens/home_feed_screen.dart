@@ -3,10 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import '../../../data/models/tweet_model.dart';
-import '../providers/tweets_provider.dart';
-import '../widgets/compose_tweet_sheet.dart';
-import '../widgets/tweet_card.dart';
+import 'package:adentweet/features/tweets/data/models/tweet_model.dart';
+import 'package:adentweet/features/tweets/presentation/providers/tweets_provider.dart';
+import 'package:adentweet/features/tweets/presentation/widgets/compose_tweet_sheet.dart';
+import 'package:adentweet/features/tweets/presentation/widgets/tweet_card.dart';
 
 class HomeFeedScreen extends ConsumerStatefulWidget {
   const HomeFeedScreen({super.key});

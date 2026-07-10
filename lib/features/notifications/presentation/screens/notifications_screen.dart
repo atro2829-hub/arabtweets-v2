@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../data/models/notification_model.dart';
-import '../providers/notifications_provider.dart';
-import '../widgets/notification_card.dart';
+import 'package:adentweet/features/notifications/data/models/notification_model.dart';
+import 'package:adentweet/features/notifications/presentation/providers/notifications_provider.dart';
+import 'package:adentweet/features/notifications/presentation/widgets/notification_card.dart';
 
 class NotificationsScreen extends ConsumerStatefulWidget {
   const NotificationsScreen({super.key});

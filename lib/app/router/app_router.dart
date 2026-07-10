@@ -3,26 +3,27 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../features/auth/presentation/screens/welcome_screen.dart';
-import '../../features/auth/presentation/screens/login_screen.dart';
-import '../../features/auth/presentation/screens/register_screen.dart';
-import '../../features/tweets/presentation/screens/home_feed_screen.dart';
-import '../../features/tweets/presentation/screens/tweet_detail_screen.dart';
-import '../../features/tweets/presentation/screens/compose_screen.dart';
-import '../../features/reels/presentation/screens/reels_screen.dart';
-import '../../features/search/presentation/screens/search_screen.dart';
-import '../../features/notifications/presentation/screens/notifications_screen.dart';
-import '../../features/messages/presentation/screens/messages_list_screen.dart';
-import '../../features/messages/presentation/screens/chat_screen.dart';
-import '../../features/profile/presentation/screens/profile_screen.dart';
-import '../../features/profile/presentation/screens/edit_profile_screen.dart';
-import '../../features/admin/presentation/screens/admin_dashboard_screen.dart';
-import '../../features/settings/presentation/screens/settings_screen.dart';
-import '../../features/settings/presentation/screens/about_screen.dart';
-import '../../features/settings/presentation/screens/terms_screen.dart';
-import '../../features/settings/presentation/screens/privacy_screen.dart';
-import '../../features/settings/presentation/screens/cookies_screen.dart';
-import '../../shared/widgets/main_shell.dart';
+import 'package:adentweet/features/auth/presentation/providers/auth_provider.dart';
+import 'package:adentweet/features/auth/presentation/screens/welcome_screen.dart';
+import 'package:adentweet/features/auth/presentation/screens/login_screen.dart';
+import 'package:adentweet/features/auth/presentation/screens/register_screen.dart';
+import 'package:adentweet/features/tweets/presentation/screens/home_feed_screen.dart';
+import 'package:adentweet/features/tweets/presentation/screens/tweet_detail_screen.dart';
+import 'package:adentweet/features/tweets/presentation/screens/compose_screen.dart';
+import 'package:adentweet/features/reels/presentation/screens/reels_screen.dart';
+import 'package:adentweet/features/search/presentation/screens/search_screen.dart';
+import 'package:adentweet/features/notifications/presentation/screens/notifications_screen.dart';
+import 'package:adentweet/features/messages/presentation/screens/messages_list_screen.dart';
+import 'package:adentweet/features/messages/presentation/screens/chat_screen.dart';
+import 'package:adentweet/features/profile/presentation/screens/profile_screen.dart';
+import 'package:adentweet/features/profile/presentation/screens/edit_profile_screen.dart';
+import 'package:adentweet/features/admin/presentation/screens/admin_dashboard_screen.dart';
+import 'package:adentweet/features/settings/presentation/screens/settings_screen.dart';
+import 'package:adentweet/features/settings/presentation/screens/about_screen.dart';
+import 'package:adentweet/features/settings/presentation/screens/terms_screen.dart';
+import 'package:adentweet/features/settings/presentation/screens/privacy_screen.dart';
+import 'package:adentweet/features/settings/presentation/screens/cookies_screen.dart';
+import 'package:adentweet/shared/widgets/main_shell.dart';
 
 final appRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
@@ -124,7 +125,13 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/profile/edit',
         name: 'editProfile',
-        builder: (context, state) => const EditProfileScreen(),
+        builder: (context, state) {
+          final profile = ref.read(userProfileProvider).valueOrNull;
+          if (profile == null) {
+            return const Scaffold(body: Center(child: CircularProgressIndicator()));
+          }
+          return EditProfileScreen(profile: profile);
+        },
       ),
       GoRoute(
         path: '/chat/:conversationId',

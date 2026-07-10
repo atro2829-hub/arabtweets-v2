@@ -5,12 +5,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import '../../../../core/constants/api_constants.dart';
-import '../../../data/models/tweet_model.dart';
-import '../providers/tweets_provider.dart';
-import '../widgets/compose_tweet_sheet.dart';
-import '../widgets/media_grid.dart';
-import '../widgets/tweet_card.dart';
+import 'package:adentweet/core/constants/api_constants.dart';
+import 'package:adentweet/features/tweets/data/models/tweet_model.dart';
+import 'package:adentweet/features/tweets/presentation/providers/tweets_provider.dart';
+import 'package:adentweet/features/tweets/presentation/widgets/compose_tweet_sheet.dart';
+import 'package:adentweet/features/tweets/presentation/widgets/media_grid.dart';
+import 'package:adentweet/features/tweets/presentation/widgets/tweet_card.dart';
 
 class TweetDetailScreen extends ConsumerStatefulWidget {
   final String tweetId;

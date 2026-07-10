@@ -30,7 +30,7 @@ class ConversationModel {
   });
 
   String get otherFullAvatarUrl {
-    if (otherAvatarUrl == null || otherAvatarUrl!.isEmpty) return '';
+    if (otherAvatarUrl == null || otherAvatarUrl!.isEmpty) return ';
     return ApiConstants.getAvatarUrl(otherAvatarUrl!);
   }
 

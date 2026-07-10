@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import '../../data/models/user_model.dart';
+import 'package:adentweet/features/auth/data/models/user_model.dart';
 
 final authProvider =
     NotifierProvider<AuthNotifier, AuthState>(() => AuthNotifier());

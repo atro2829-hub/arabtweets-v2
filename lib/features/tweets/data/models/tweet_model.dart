@@ -1,5 +1,5 @@
 import '../../../../../core/constants/api_constants.dart';
-import '../../../auth/data/models/user_model.dart';
+import 'package:adentweet/features/auth/data/models/user_model.dart';
 
 class TweetModel {
   final String id;
@@ -53,10 +53,10 @@ class TweetModel {
   });
 
   // Author convenience getters
-  String get authorUsername => username ?? '';
-  String get authorDisplayName => displayName ?? '';
+  String get authorUsername => username ?? ';
+  String get authorDisplayName => displayName ?? ';
   String get authorFullAvatarUrl {
-    if (avatarUrl == null || avatarUrl!.isEmpty) return '';
+    if (avatarUrl == null || avatarUrl!.isEmpty) return ';
     return ApiConstants.getAvatarUrl(avatarUrl!);
   }
   bool get authorIsVerified => isVerified ?? false;
@@ -70,7 +70,7 @@ class TweetModel {
   bool get isReply => replyToId != null;
 
   String get fullAvatarUrl {
-    if (avatarUrl == null || avatarUrl!.isEmpty) return '';
+    if (avatarUrl == null || avatarUrl!.isEmpty) return ';
     return ApiConstants.getAvatarUrl(avatarUrl!);
   }
 

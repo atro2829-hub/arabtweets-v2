@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import '../../../../core/constants/api_constants.dart';
-import '../../data/models/notification_model.dart';
+import 'package:adentweet/core/constants/api_constants.dart';
+import 'package:adentweet/features/notifications/data/models/notification_model.dart';
 
 final _client = () => Supabase.instance.client;
 
@@ -22,7 +22,7 @@ class NotificationsNotifier extends AsyncNotifier<List<NotificationModel>> {
 
   @override
   Future<List<NotificationModel>> build() async {
-    final userId = _currentUserIdProvider.read(ref);
+    final userId = ref.read(_currentUserIdProvider);
     if (userId == null) return [];
 
     _hasMore = true;
@@ -74,7 +74,7 @@ class NotificationsNotifier extends AsyncNotifier<List<NotificationModel>> {
             value: userId,
           ),
           callback: (payload) {
-            final newNotifData = payload.new as Map<String, dynamic>?;
+            final newNotifData = payload.newRecord as Map<String, dynamic>?;
             if (newNotifData == null) return;
 
             // Fetch full notification with profile data
@@ -86,7 +86,7 @@ class NotificationsNotifier extends AsyncNotifier<List<NotificationModel>> {
 
   Future<void> _fetchFullNotification(String notificationId) async {
     try {
-      final userId = _currentUserIdProvider.read(ref);
+      final userId = ref.read(_currentUserIdProvider);
       if (userId == null) return;
 
       final response = await _client().rpc('get_user_notifications', params: {
@@ -104,7 +104,7 @@ class NotificationsNotifier extends AsyncNotifier<List<NotificationModel>> {
   }
 
   Future<void> refresh() async {
-    final userId = _currentUserIdProvider.read(ref);
+    final userId = ref.read(_currentUserIdProvider);
     if (userId == null) return;
 
     state = const AsyncLoading();
@@ -116,7 +116,7 @@ class NotificationsNotifier extends AsyncNotifier<List<NotificationModel>> {
     if (!_hasMore) return;
 
     final current = state.valueOrNull ?? [];
-    final userId = _currentUserIdProvider.read(ref);
+    final userId = ref.read(_currentUserIdProvider);
     if (userId == null) return;
 
     final olderNotifications =
@@ -142,7 +142,7 @@ class NotificationsNotifier extends AsyncNotifier<List<NotificationModel>> {
 
 /// Provider for unread notifications count as a stream
 final unreadCountProvider = StreamProvider.autoDispose<int>((ref) {
-  final userId = _currentUserIdProvider.read(ref);
+  final userId = ref.read(_currentUserIdProvider);
   if (userId == null) return Stream.value(0);
 
   final controller = StreamController<int>.broadcast();
@@ -215,7 +215,7 @@ class MarkAllReadNotifier extends AsyncNotifier<void> {
   }
 
   Future<void> markAllRead() async {
-    final userId = _currentUserIdProvider.read(ref);
+    final userId = ref.read(_currentUserIdProvider);
     if (userId == null) return;
 
     state = const AsyncLoading();

@@ -8,11 +8,11 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:toastification/toastification.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
-import '../../../../core/constants/api_constants.dart';
-import '../../../../core/utils/formatters.dart';
-import '../../../auth/data/models/user_model.dart';
-import '../../../tweets/data/models/tweet_model.dart';
-import '../providers/profile_provider.dart';
+import 'package:adentweet/core/constants/api_constants.dart';
+import 'package:adentweet/core/utils/formatters.dart';
+import 'package:adentweet/features/auth/data/models/user_model.dart';
+import 'package:adentweet/features/tweets/data/models/tweet_model.dart';
+import 'package:adentweet/features/profile/presentation/providers/profile_provider.dart';
 
 class ProfileScreen extends ConsumerStatefulWidget {
   final String username;
@@ -525,10 +525,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen>
                     ),
 
                     // Bio
-                    if (profile.bio.isNotEmpty) ...[
+                    if ((profile.bio ?? '').isNotEmpty) ...[
                       const SizedBox(height: 12),
                       Text(
-                        profile.bio,
+                        profile.bio ?? '',
                         style: const TextStyle(fontSize: 15, height: 1.4),
                       ),
                     ],
@@ -540,22 +540,22 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen>
                       spacing: 16,
                       runSpacing: 8,
                       children: [
-                        if (profile.location.isNotEmpty)
+                        if ((profile.location ?? '').isNotEmpty)
                           Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Icon(Icons.location_on_outlined, size: 18, color: Colors.grey.shade600),
                               const SizedBox(width: 4),
-                              Text(profile.location, style: TextStyle(color: Colors.grey.shade600, fontSize: 14)),
+                              Text(profile.location ?? '', style: TextStyle(color: Colors.grey.shade600, fontSize: 14)),
                             ],
                           ),
-                        if (profile.website.isNotEmpty)
+                        if ((profile.website ?? '').isNotEmpty)
                           Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Icon(Icons.link, size: 18, color: Colors.grey.shade600),
                               const SizedBox(width: 4),
-                              Text(profile.website, style: TextStyle(color: Colors.blue, fontSize: 14)),
+                              Text(profile.website ?? '', style: TextStyle(color: Colors.blue, fontSize: 14)),
                             ],
                           ),
                         Row(
