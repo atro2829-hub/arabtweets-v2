@@ -14,7 +14,7 @@ class MessagesListScreen extends ConsumerStatefulWidget {
 
 class _MessagesListScreenState extends ConsumerState<MessagesListScreen> {
   final TextEditingController _searchController = TextEditingController();
-  String _searchQuery = ';
+  String _searchQuery = '';
 
   @override
   void initState() {
@@ -31,7 +31,7 @@ class _MessagesListScreenState extends ConsumerState<MessagesListScreen> {
   }
 
   String _formatTime(DateTime? time) {
-    if (time == null) return ';
+    if (time == null) return '';
     final now = DateTime.now();
     final diff = now.difference(time);
 

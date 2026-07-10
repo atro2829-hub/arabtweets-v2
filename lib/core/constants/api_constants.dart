@@ -12,25 +12,25 @@ class ApiConstants {
   static const String reelsBucket = 'reels';
 
   static String getAvatarUrl(String? path) {
-    if (path == null || path.isEmpty) return ';
+    if (path == null || path.isEmpty) return '';
     if (path.startsWith('http')) return path;
     return '$supabaseUrl/storage/v1/object/public/$avatarsBucket/$path';
   }
 
   static String getCoverUrl(String? path) {
-    if (path == null || path.isEmpty) return ';
+    if (path == null || path.isEmpty) return '';
     if (path.startsWith('http')) return path;
     return '$supabaseUrl/storage/v1/object/public/$coversBucket/$path';
   }
 
   static String getMediaUrl(String? path) {
-    if (path == null || path.isEmpty) return ';
+    if (path == null || path.isEmpty) return '';
     if (path.startsWith('http')) return path;
     return '$supabaseUrl/storage/v1/object/public/$mediaBucket/$path';
   }
 
   static String getReelUrl(String? path) {
-    if (path == null || path.isEmpty) return ';
+    if (path == null || path.isEmpty) return '';
     if (path.startsWith('http')) return path;
     return '$supabaseUrl/storage/v1/object/public/$reelsBucket/$path';
   }

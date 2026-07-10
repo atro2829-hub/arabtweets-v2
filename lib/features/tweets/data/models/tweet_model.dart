@@ -53,10 +53,10 @@ class TweetModel {
   });
 
   // Author convenience getters
-  String get authorUsername => username ?? ';
-  String get authorDisplayName => displayName ?? ';
+  String get authorUsername => username ??? '';
+  String get authorDisplayName => displayName ??? '';
   String get authorFullAvatarUrl {
-    if (avatarUrl == null || avatarUrl!.isEmpty) return ';
+    if (avatarUrl == null || avatarUrl!.isEmpty) return '';
     return ApiConstants.getAvatarUrl(avatarUrl!);
   }
   bool get authorIsVerified => isVerified ?? false;
@@ -70,7 +70,7 @@ class TweetModel {
   bool get isReply => replyToId != null;
 
   String get fullAvatarUrl {
-    if (avatarUrl == null || avatarUrl!.isEmpty) return ';
+    if (avatarUrl == null || avatarUrl!.isEmpty) return '';
     return ApiConstants.getAvatarUrl(avatarUrl!);
   }
 
@@ -123,6 +123,7 @@ class TweetModel {
     int? likesCount,
     int? retweetsCount,
     int? repliesCount,
+    int? bookmarksCount,
   }) {
     return TweetModel(
       id: id,
@@ -138,7 +139,7 @@ class TweetModel {
       likesCount: likesCount ?? this.likesCount,
       retweetsCount: retweetsCount ?? this.retweetsCount,
       repliesCount: repliesCount ?? this.repliesCount,
-      bookmarksCount: bookmarksCount,
+      bookmarksCount: bookmarksCount ?? this.bookmarksCount,
       createdAt: createdAt,
       displayName: displayName,
       username: username,

@@ -419,7 +419,7 @@ class _ReelPage extends StatelessWidget {
 
   Widget _buildAvatarButton(BuildContext context) {
     final author = reel.author;
-    final avatarUrl = author?.fullAvatarUrl ?? ';
+    final avatarUrl = author?.fullAvatarUrl ??? '';
     final currentUserId = Supabase.instance.client.auth.currentUser?.id;
     final isOwnReel = author?.id == currentUserId;
 
@@ -476,8 +476,8 @@ class _ReelPage extends StatelessWidget {
 
   Widget _buildAuthorInfo() {
     final author = reel.author;
-    final displayName = author?.displayName ?? ';
-    final username = author?.username ?? ';
+    final displayName = author?.displayName ??? '';
+    final username = author?.username ??? '';
 
     return GestureDetector(
       onTap: onProfileTap,
