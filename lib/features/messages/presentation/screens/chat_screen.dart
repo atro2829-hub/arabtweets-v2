@@ -44,7 +44,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   final Map<String, VideoPlayerController> _videoControllers = {};
 
   String get _currentUserId =>
-      Supabase.instance.client.auth.currentUser?.id ??? '';
+      Supabase.instance.client.auth.currentUser?.id ?? '';
 
   @override
   void initState() {

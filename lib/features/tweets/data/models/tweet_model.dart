@@ -53,8 +53,8 @@ class TweetModel {
   });
 
   // Author convenience getters
-  String get authorUsername => username ??? '';
-  String get authorDisplayName => displayName ??? '';
+  String get authorUsername => username ?? '';
+  String get authorDisplayName => displayName ?? '';
   String get authorFullAvatarUrl {
     if (avatarUrl == null || avatarUrl!.isEmpty) return '';
     return ApiConstants.getAvatarUrl(avatarUrl!);
