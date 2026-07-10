@@ -28,21 +28,8 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = true
-            isShrinkResources = true
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-        debug {
-            isDebuggable = true
             isMinifyEnabled = false
-        }
-        profile {
-            isMinifyEnabled = false
-            isDebuggable = false
-            matchingFallbacks.add(listOf("release"))
+            isShrinkResources = false
         }
     }
 

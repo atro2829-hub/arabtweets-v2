@@ -1,4 +1,5 @@
 import 'package:adentweet/core/constants/api_constants.dart';
+// ignore: unused_import
 import 'package:adentweet/features/auth/data/models/user_model.dart';
 
 class TweetModel {
