@@ -39,15 +39,12 @@ jobs:
         run: flutter analyze --no-fatal-infos --no-fatal-warnings
 
       - name: Build release APK
-        run: cd android && ./gradlew assembleRelease --stacktrace 2>&1
-
-      - name: Find APK
-        run: find build -name "*.apk" -type f 2>/dev/null || echo "No APK found"
+        run: flutter build apk --release --split-per-abi --target-platform android-arm64
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: adentweet-apk-${{ github.sha }}
-          path: build/app/outputs/flutter-apk/app-release.apk
+          path: build/app/outputs/flutter-apk/*.apk
           if-no-files-found: warn
           retention-days: 30
