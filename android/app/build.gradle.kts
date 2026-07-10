@@ -42,7 +42,7 @@ android {
         profile {
             isMinifyEnabled = false
             isDebuggable = false
-            matchingFallbacks += listOf("release")
+            matchingFallbacks.add(listOf("release"))
         }
     }
 
