@@ -87,7 +87,7 @@ class ProfileCardSkeleton extends StatelessWidget {
       children: [
         _SkeletonRect(width: double.infinity, height: 160),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -183,12 +183,10 @@ class MessageSkeleton extends StatelessWidget {
 class _SkeletonRect extends StatelessWidget {
   final double width;
   final double height;
-  final double borderRadius;
 
   const _SkeletonRect({
     required this.width,
     required this.height,
-    this.borderRadius = 4,
   });
 
   @override
@@ -198,7 +196,7 @@ class _SkeletonRect extends StatelessWidget {
       height: height,
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(borderRadius),
+        borderRadius: BorderRadius.circular(4),
       ),
     );
   }

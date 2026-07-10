@@ -25,7 +25,7 @@ class NotificationCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: notification.isRead
               ? Colors.transparent
-              : colorScheme.primary.withOpacity(0.05),
+              : colorScheme.primary.withValues(alpha: 0.05),
           border: Border(
             bottom: BorderSide(
               color: theme.dividerColor,
@@ -60,7 +60,7 @@ class NotificationCard extends StatelessWidget {
               },
               child: CircleAvatar(
                 radius: 22,
-                backgroundColor: colorScheme.primary.withOpacity(0.1),
+                backgroundColor: colorScheme.primary.withValues(alpha: 0.1),
                 backgroundImage: notification.fromFullAvatarUrl.isNotEmpty
                     ? NetworkImage(notification.fromFullAvatarUrl)
                     : null,
@@ -129,7 +129,7 @@ class NotificationCard extends StatelessWidget {
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         color: colorScheme.surfaceContainerHighest
-                            .withOpacity(0.5),
+                            .withValues(alpha: 0.5),
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
                           color: theme.dividerColor,

@@ -106,7 +106,7 @@ class _MessagesListScreenState extends ConsumerState<MessagesListScreen> {
                   size: 20,
                 ),
                 filled: true,
-                fillColor: colorScheme.surfaceContainerHighest.withOpacity(0.5),
+                fillColor: colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
                 contentPadding: const EdgeInsets.symmetric(vertical: 10),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
@@ -180,7 +180,7 @@ class _MessagesListScreenState extends ConsumerState<MessagesListScreen> {
             width: 64,
             height: 64,
             decoration: BoxDecoration(
-              color: colorScheme.primary.withOpacity(0.1),
+              color: colorScheme.primary.withValues(alpha: 0.1),
               shape: BoxShape.circle,
             ),
             child: Icon(
@@ -217,7 +217,7 @@ class _MessagesListScreenState extends ConsumerState<MessagesListScreen> {
           Icon(
             Icons.search_off,
             size: 48,
-            color: theme.colorScheme.outline.withOpacity(0.5),
+            color: theme.colorScheme.outline.withValues(alpha: 0.5),
           ),
           const SizedBox(height: 12),
           Text(
@@ -294,7 +294,7 @@ class _ConversationTile extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 26,
-              backgroundColor: colorScheme.primary.withOpacity(0.1),
+              backgroundColor: colorScheme.primary.withValues(alpha: 0.1),
               backgroundImage: conversation.otherFullAvatarUrl.isNotEmpty
                   ? NetworkImage(conversation.otherFullAvatarUrl)
                   : null,

@@ -139,7 +139,7 @@ class _TweetDetailScreenState extends ConsumerState<TweetDetailScreen> {
               color: Theme.of(context)
                   .colorScheme
                   .outlineVariant
-                  .withOpacity(0.1),
+                  .withValues(alpha: 0.1),
             ),
           ),
 
@@ -210,7 +210,7 @@ class _TweetDetailScreenState extends ConsumerState<TweetDetailScreen> {
         color: colorScheme.surface,
         border: Border(
           top: BorderSide(
-            color: colorScheme.outlineVariant.withOpacity(0.3),
+            color: colorScheme.outlineVariant.withValues(alpha: 0.3),
           ),
         ),
       ),
@@ -477,19 +477,19 @@ class _MainTweetCard extends ConsumerWidget {
           const SizedBox(height: 12),
 
           // Reply to indicator
-          if (tweet.replyToUsername != null)
+          if (tweet.isReply)
             Padding(
               padding: const EdgeInsets.only(bottom: 4),
               child: Row(
                 children: [
                   Text(
-                    'الرد على ',
+                    'الرد على تغريدة',
                     style: theme.textTheme.bodySmall?.copyWith(
                       color: colorScheme.outline,
                     ),
                   ),
                   Text(
-                    '@${tweet.replyToUsername}',
+                    '@${tweet.replyToUserId ?? ""}',
                     style: theme.textTheme.bodySmall?.copyWith(
                       color: colorScheme.primary,
                       fontWeight: FontWeight.w500,
@@ -560,7 +560,7 @@ class _MainTweetCard extends ConsumerWidget {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.mute_outlined),
+              leading: const Icon(Icons.volume_off_outlined),
               title: const Text('كتم الحساب'),
               onTap: () => Navigator.pop(context),
             ),
@@ -591,21 +591,21 @@ class _StatsBar extends StatelessWidget {
           Container(
             width: 1,
             height: 24,
-            color: colorScheme.outlineVariant.withOpacity(0.3),
+            color: colorScheme.outlineVariant.withValues(alpha: 0.3),
             margin: const EdgeInsets.symmetric(horizontal: 20),
           ),
           _StatItem(count: tweet.likesCount, label: 'إعجاب'),
           Container(
             width: 1,
             height: 24,
-            color: colorScheme.outlineVariant.withOpacity(0.3),
+            color: colorScheme.outlineVariant.withValues(alpha: 0.3),
             margin: const EdgeInsets.symmetric(horizontal: 20),
           ),
           _StatItem(count: tweet.bookmarksCount, label: 'مفضلة'),
           Container(
             width: 1,
             height: 24,
-            color: colorScheme.outlineVariant.withOpacity(0.3),
+            color: colorScheme.outlineVariant.withValues(alpha: 0.3),
             margin: const EdgeInsets.symmetric(horizontal: 20),
           ),
           _StatItem(count: tweet.viewsCount, label: 'مشاهدة'),
@@ -847,14 +847,14 @@ class _DetailActionButton extends StatelessWidget {
   final Widget icon;
   final String label;
   final bool isActive;
-  final Color activeColor;
+  final Color? activeColor;
   final VoidCallback onTap;
 
   const _DetailActionButton({
     required this.icon,
     required this.label,
     this.isActive = false,
-    required this.activeColor,
+    this.activeColor,
     required this.onTap,
   });
 

@@ -104,17 +104,17 @@ class NotificationModel {
   Color get typeIconBgColor {
     switch (type) {
       case NotificationType.like:
-        return const Color(0xFFE0245E).withOpacity(0.1);
+        return const Color(0xFFE0245E).withValues(alpha: 0.1);
       case NotificationType.retweet:
-        return const Color(0xFF17BF63).withOpacity(0.1);
+        return const Color(0xFF17BF63).withValues(alpha: 0.1);
       case NotificationType.follow:
-        return const Color(0xFF1D9BF0).withOpacity(0.1);
+        return const Color(0xFF1D9BF0).withValues(alpha: 0.1);
       case NotificationType.reply:
-        return const Color(0xFF1D9BF0).withOpacity(0.1);
+        return const Color(0xFF1D9BF0).withValues(alpha: 0.1);
       case NotificationType.mention:
-        return const Color(0xFF1D9BF0).withOpacity(0.1);
+        return const Color(0xFF1D9BF0).withValues(alpha: 0.1);
       case NotificationType.message:
-        return const Color(0xFF1D9BF0).withOpacity(0.1);
+        return const Color(0xFF1D9BF0).withValues(alpha: 0.1);
     }
   }
 

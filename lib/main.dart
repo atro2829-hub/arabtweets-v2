@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:responsive_framework/responsive_wrapper.dart';
-import 'package:responsive_framework/utils/scroll_behavior.dart';
 
 import 'app/theme/app_theme.dart';
 import 'app/router/app_router.dart';
@@ -14,13 +12,6 @@ Future<void> main() async {
   await Supabase.initialize(
     url: ApiConstants.supabaseUrl,
     anonKey: ApiConstants.supabaseAnonKey,
-    authOptions: const FlutterAuthClientConfig(
-      autoRefreshToken: true,
-      detectSessionInUrl: true,
-    ),
-    realtimeClientOptions: const RealtimeClientOptions(
-      eventsPerSecond: 10,
-    ),
   );
 
   runApp(const ProviderScope(child: AdenTweetApp()));
@@ -41,18 +32,6 @@ class AdenTweetApp extends ConsumerWidget {
       darkTheme: AppTheme.dark,
       themeMode: themeMode,
       routerConfig: router,
-      builder: (context, child) => ResponsiveWrapper.builder(
-        child,
-        maxWidth: 1200,
-        defaultScale: true,
-        breakpoints: [
-          const ResponsiveBreakpoint.resize(480, name: MOBILE),
-          const ResponsiveBreakpoint.resize(768, name: TABLET),
-          const ResponsiveBreakpoint.resize(1024, name: DESKTOP),
-        ],
-        background: Container(
-            color: themeMode == ThemeMode.dark ? Colors.black : Colors.white),
-      ),
     );
   }
 }

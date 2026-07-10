@@ -17,13 +17,6 @@ class MainShell extends ConsumerWidget {
     _NavItem(icon: Icons.mail_outlined, activeIcon: Icons.mail, label: 'رسائل', route: '/messages'),
   ];
 
-  int _getSelectedIndex(String location) {
-    for (int i = 0; i < _navItems.length; i++) {
-      if (location.startsWith(_navItems[i].route)) return i;
-    }
-    return 0;
-  }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentIndex = ref.watch(currentNavIndexProvider);

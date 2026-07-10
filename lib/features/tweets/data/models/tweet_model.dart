@@ -52,6 +52,23 @@ class TweetModel {
     this.isBookmarked = false,
   });
 
+  // Author convenience getters
+  String get authorUsername => username ?? '';
+  String get authorDisplayName => displayName ?? '';
+  String get authorFullAvatarUrl {
+    if (avatarUrl == null || avatarUrl!.isEmpty) return '';
+    return ApiConstants.getAvatarUrl(avatarUrl!);
+  }
+  bool get authorIsVerified => isVerified ?? false;
+  String get authorVerificationType => verificationType ?? 'none';
+
+  // Media convenience getters
+  bool get hasMedia => mediaUrls.isNotEmpty && mediaType != 'none';
+  bool get isGif => mediaType == 'gif';
+  bool get isVideo => mediaType == 'video';
+  bool get hasQuoteTweet => quoteTweetId != null;
+  bool get isReply => replyToId != null;
+
   String get fullAvatarUrl {
     if (avatarUrl == null || avatarUrl!.isEmpty) return '';
     return ApiConstants.getAvatarUrl(avatarUrl!);

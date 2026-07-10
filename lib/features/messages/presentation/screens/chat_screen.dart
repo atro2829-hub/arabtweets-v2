@@ -267,7 +267,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
             children: [
               CircleAvatar(
                 radius: 18,
-                backgroundColor: colorScheme.primary.withOpacity(0.1),
+                backgroundColor: colorScheme.primary.withValues(alpha: 0.1),
                 backgroundImage: widget.otherAvatarUrl.isNotEmpty
                     ? NetworkImage(widget.otherAvatarUrl)
                     : null,
@@ -431,7 +431,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
           children: [
             CircleAvatar(
               radius: 36,
-              backgroundColor: colorScheme.primary.withOpacity(0.1),
+              backgroundColor: colorScheme.primary.withValues(alpha: 0.1),
               backgroundImage: widget.otherAvatarUrl.isNotEmpty
                   ? NetworkImage(widget.otherAvatarUrl)
                   : null,
@@ -567,7 +567,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
             child: Container(
               constraints: const BoxConstraints(maxHeight: 120),
               decoration: BoxDecoration(
-                color: colorScheme.surfaceContainerHighest.withOpacity(0.5),
+                color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
                 borderRadius: BorderRadius.circular(24),
               ),
               child: TextField(
@@ -709,7 +709,7 @@ class _MessageBubble extends StatelessWidget {
                             color: (isMine
                                     ? colorScheme.onPrimary
                                     : colorScheme.onSecondary)
-                                .withOpacity(0.7),
+                                .withValues(alpha: 0.7),
                           ),
                         ),
                         if (isMine) ...[
@@ -719,7 +719,7 @@ class _MessageBubble extends StatelessWidget {
                                 ? Icons.done_all
                                 : Icons.check,
                             size: 14,
-                            color: colorScheme.onPrimary.withOpacity(0.7),
+                            color: colorScheme.onPrimary.withValues(alpha: 0.7),
                           ),
                         ],
                       ],
@@ -774,7 +774,7 @@ class _MessageBubble extends StatelessWidget {
                           color: (isMine
                                   ? colorScheme.onPrimary
                                   : colorScheme.onSecondary)
-                              .withOpacity(0.1),
+                              .withValues(alpha: 0.1),
                         ),
                         child: Row(
                           children: [
@@ -784,7 +784,7 @@ class _MessageBubble extends StatelessWidget {
                               color: (isMine
                                       ? colorScheme.onPrimary
                                       : colorScheme.onSecondary)
-                                  .withOpacity(0.7),
+                                  .withValues(alpha: 0.7),
                             ),
                             const SizedBox(width: 4),
                             Expanded(
@@ -794,7 +794,7 @@ class _MessageBubble extends StatelessWidget {
                                   color: (isMine
                                           ? colorScheme.onPrimary
                                           : colorScheme.onSecondary)
-                                      .withOpacity(0.8),
+                                      .withValues(alpha: 0.8),
                                 ),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
@@ -827,7 +827,7 @@ class _MessageBubble extends StatelessWidget {
                               color: (isMine
                                       ? colorScheme.onPrimary
                                       : colorScheme.onSecondary)
-                                  .withOpacity(0.7),
+                                  .withValues(alpha: 0.7),
                             ),
                           ),
                           if (isMine) ...[
@@ -837,7 +837,7 @@ class _MessageBubble extends StatelessWidget {
                                   ? Icons.done_all
                                   : Icons.check,
                               size: 14,
-                              color: colorScheme.onPrimary.withOpacity(0.7),
+                              color: colorScheme.onPrimary.withValues(alpha: 0.7),
                             ),
                           ],
                         ],
@@ -873,7 +873,7 @@ class _MessageBubble extends StatelessWidget {
               color: (isMine
                       ? colorScheme.onPrimary
                       : colorScheme.onSecondary)
-                  .withOpacity(0.1),
+                  .withValues(alpha: 0.1),
               child: Center(
                 child: CircularProgressIndicator(
                   value: progress,

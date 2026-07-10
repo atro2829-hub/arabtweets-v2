@@ -61,7 +61,6 @@ class _ComposeTweetSheetState extends ConsumerState<ComposeTweetSheet> {
 
   bool _isLoading = false;
   String _mediaType = 'none';
-  String _draftContent = '';
 
   @override
   void initState() {
@@ -73,17 +72,12 @@ class _ComposeTweetSheetState extends ConsumerState<ComposeTweetSheet> {
   void dispose() {
     _textController.dispose();
     _focusNode.dispose();
-    for (final file in _mediaFiles) {
-      file.path;
-    }
     super.dispose();
   }
 
   int get _charCount => _textController.text.length;
   bool get _canSend => _textController.text.trim().isNotEmpty && !_isLoading;
   bool get _isReply => widget.replyToId != null;
-  bool get _isQuote => widget.quoteTweet != null;
-  bool get _isEditing => widget.tweetId != null;
 
   double get _charProgress => _charCount / ApiConstants.maxTweetLength;
 
@@ -114,7 +108,7 @@ class _ComposeTweetSheetState extends ConsumerState<ComposeTweetSheet> {
         imageQuality: 85,
       );
 
-      if (images != null) {
+      if (images.isNotEmpty) {
         final remaining = ApiConstants.maxMediaCount - _mediaFiles.length;
         final toAdd = images.take(remaining).toList();
 
@@ -428,7 +422,7 @@ class _ComposeTweetSheetState extends ConsumerState<ComposeTweetSheet> {
             decoration: BoxDecoration(
               border: Border(
                 top: BorderSide(
-                  color: colorScheme.outlineVariant.withOpacity(0.3),
+                  color: colorScheme.outlineVariant.withValues(alpha: 0.3),
                 ),
               ),
             ),
@@ -596,7 +590,7 @@ class _MediaPreviewGrid extends StatelessWidget {
             onTap: () => onRemove(index),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.6),
+                color: Colors.black.withValues(alpha: 0.6),
                 shape: BoxShape.circle,
               ),
               padding: const EdgeInsets.all(4),
@@ -633,7 +627,7 @@ class _QuoteTweetPreview extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         border: Border.all(
-          color: colorScheme.outlineVariant.withOpacity(0.5),
+          color: colorScheme.outlineVariant.withValues(alpha: 0.5),
         ),
         borderRadius: BorderRadius.circular(16),
       ),

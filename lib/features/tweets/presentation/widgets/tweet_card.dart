@@ -139,7 +139,7 @@ class _TweetCardState extends ConsumerState<TweetCard>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Reposted by header
-          if (widget.showRetweetHeader && widget.tweet.retweetedByUsername != null)
+          if (widget.showRetweetHeader)
             Padding(
               padding: const EdgeInsets.only(left: 56, bottom: 4, top: 8),
               child: Row(
@@ -155,7 +155,7 @@ class _TweetCardState extends ConsumerState<TweetCard>
                   ),
                   const SizedBox(width: 4),
                   Text(
-                    'أعد نشر ${widget.tweet.retweetedByUsername!}',
+                    'أعد نشر',
                     style: theme.textTheme.bodySmall?.copyWith(
                       color: colorScheme.outline,
                       fontWeight: FontWeight.w500,
@@ -166,19 +166,19 @@ class _TweetCardState extends ConsumerState<TweetCard>
             ),
 
           // Reply to header
-          if (widget.tweet.replyToUsername != null)
+          if (widget.tweet.isReply)
             Padding(
               padding: const EdgeInsets.only(left: 56, bottom: 2),
               child: Row(
                 children: [
                   Text(
-                    'الرد على ',
+                    'الرد على تغريدة',
                     style: theme.textTheme.bodySmall?.copyWith(
                       color: colorScheme.outline,
                     ),
                   ),
                   Text(
-                    '@${widget.tweet.replyToUsername}',
+                    '@${widget.tweet.replyToUserId ?? ""}',
                     style: theme.textTheme.bodySmall?.copyWith(
                       color: colorScheme.primary,
                       fontWeight: FontWeight.w500,
@@ -245,7 +245,7 @@ class _TweetCardState extends ConsumerState<TweetCard>
           Divider(
             height: 1,
             thickness: 0.5,
-            color: colorScheme.outlineVariant.withOpacity(0.3),
+            color: colorScheme.outlineVariant.withValues(alpha: 0.3),
           ),
         ],
       ),
@@ -408,7 +408,7 @@ class _AuthorRow extends ConsumerWidget {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.mute_outlined),
+              leading: const Icon(Icons.volume_off_outlined),
               title: const Text('كتم الحساب'),
               onTap: () => Navigator.pop(context),
             ),
@@ -573,8 +573,8 @@ class _ActionBar extends ConsumerWidget {
           onTap: onLike,
           child: Row(
             children: [
-              AnimatedBuilder(
-                animation: likeScaleAnimation,
+              _CustomAnimatedBuilder(
+                listenable: likeScaleAnimation,
                 builder: (context, child) {
                   return Transform.scale(
                     scale: likeScaleAnimation.value,
@@ -722,18 +722,16 @@ class _ActionButton extends StatelessWidget {
 
 // ─── Animated Builder ────────────────────────────────────────────────────────
 
-class AnimatedBuilder extends AnimatedWidget {
+class _CustomAnimatedBuilder extends AnimatedWidget {
   final Widget Function(BuildContext context, Widget? child) builder;
   final Widget? child;
 
-  const AnimatedBuilder({
+  const _CustomAnimatedBuilder({
     super.key,
     required super.listenable,
     required this.builder,
     this.child,
   });
-
-  Animation<double> get _animation => listenable as Animation<double>;
 
   @override
   Widget build(BuildContext context) {
@@ -847,7 +845,7 @@ class TweetCardShimmer extends StatelessWidget {
             color: Theme.of(context)
                 .colorScheme
                 .outlineVariant
-                .withOpacity(0.3),
+                .withValues(alpha: 0.3),
           ),
         ],
       ),

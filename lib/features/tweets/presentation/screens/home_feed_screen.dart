@@ -127,7 +127,7 @@ class _HomeFeedScreenState extends ConsumerState<HomeFeedScreen>
                 unselectedLabelStyle: theme.textTheme.titleSmall?.copyWith(
                   fontWeight: FontWeight.w500,
                 ),
-                dividerColor: colorScheme.outlineVariant.withOpacity(0.3),
+                dividerColor: colorScheme.outlineVariant.withValues(alpha: 0.3),
                 tabs: const [
                   Tab(text: 'لك'),
                   Tab(text: 'التابعين'),
