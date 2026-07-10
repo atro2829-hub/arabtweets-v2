@@ -47,12 +47,12 @@ jobs:
           echo "$KEYSTORE_BASE64" | base64 --decode > android/app/release.keystore
 
       # ── Build release APK (unsigned if no keystore, signed if keystore provided) ──
-      - name: Build APK
-        run: flutter build apk --debug
+      - name: Build release APK
+        run: flutter build apk --release
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: adentweet-apk-${{ github.sha }}
-          path: build/app/outputs/flutter-apk/app-debug.apk
+          path: build/app/outputs/flutter-apk/app-release.apk
           retention-days: 30
