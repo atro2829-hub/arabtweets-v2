@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.adentweet.app"
-    compileSdk = 35
+    compileSdk = 34
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -27,36 +27,11 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
-            isShrinkResources = false
             signingConfig = signingConfigs.getByName("debug")
-        }
-    }
-
-    buildFeatures {
-        buildConfig = true
-    }
-
-    packaging {
-        resources {
-            excludes += setOf(
-                "META-INF/DEPENDENCIES",
-                "META-INF/LICENSE",
-                "META-INF/LICENSE.txt",
-                "META-INF/license.txt",
-                "META-INF/NOTICE",
-                "META-INF/NOTICE.txt",
-                "META-INF/notice.txt",
-                "META-INF/*.kotlin_module"
-            )
         }
     }
 }
 
 flutter {
     source = "../.."
-}
-
-dependencies {
-    // All dependencies are Flutter packages - no additional native deps needed
 }

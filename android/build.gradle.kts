@@ -5,31 +5,14 @@ allprojects {
     }
 }
 
-val newBuildDir: Directory = rootProject.layout.buildDirectory.dir("../build").get()
-rootProject.layout.buildDirectory.value(newBuildDir)
-
+rootProject.buildDir = "../build"
 subprojects {
-    val newSubprojectBuildDir: Directory = newBuildDir.dir(project.name)
-    project.layout.buildDirectory.value(newSubprojectBuildDir)
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
 }
-
 subprojects {
     project.evaluationDependsOn(":app")
 }
 
-tasks.register<Delete>("clean") {
-    delete(rootProject.layout.buildDirectory)
-}
-
-// Kotlin plugin version - managed by Flutter's gradle plugin
-buildscript {
-    val kotlinVersion = "2.1.0"
-    extra["kotlin_version"] = kotlinVersion
-    repositories {
-        google()
-        mavenCentral()
-    }
-    dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
-    }
+tasks.register("clean", Delete::class) {
+    delete(rootProject.buildDir)
 }

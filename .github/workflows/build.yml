@@ -1,50 +1,28 @@
-name: Build & Analyze
+name: Build APK
 
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
 
 jobs:
-  build-android:
-    name: Build Android APK
+  build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Java 17
-        uses: actions/setup-java@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: "17"
-
-      - name: Setup Flutter 3.29.x (stable)
-        uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action@v2
         with:
           flutter-version: "3.29.x"
           channel: stable
           cache: true
-
-      - name: Get Flutter dependencies
-        run: flutter pub get
-
-      - name: Run Flutter analyze
-        run: flutter analyze --no-fatal-infos --no-fatal-warnings
-
-      - name: Build release APK
-        run: flutter build apk --release --split-per-abi --target-platform android-arm64
-
-      - name: Upload APK artifact
-        uses: actions/upload-artifact@v4
+      - run: flutter pub get
+      - run: flutter analyze --no-fatal-infos --no-fatal-warnings
+      - run: flutter build apk --release
+      - uses: actions/upload-artifact@v4
         with:
-          name: adentweet-apk-${{ github.sha }}
-          path: build/app/outputs/flutter-apk/*.apk
+          name: adentweet-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
           if-no-files-found: warn
-          retention-days: 30
