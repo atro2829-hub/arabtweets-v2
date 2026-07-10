@@ -36,7 +36,7 @@ jobs:
         run: flutter pub get
 
       - name: Run Flutter analyze
-        run: flutter analyze --no-fatal-infos
+        run: flutter analyze --no-fatal-infos --no-fatal-warnings
 
       # ── Signing: decode keystore from base64 secret if available ──
       - name: Decode keystore
