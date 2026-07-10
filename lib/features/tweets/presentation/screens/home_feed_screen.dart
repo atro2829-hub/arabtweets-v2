@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import '../../data/models/tweet_model.dart';
+import '../../../data/models/tweet_model.dart';
 import '../providers/tweets_provider.dart';
 import '../widgets/compose_tweet_sheet.dart';
 import '../widgets/tweet_card.dart';

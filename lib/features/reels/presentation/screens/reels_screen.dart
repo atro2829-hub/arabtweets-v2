@@ -8,7 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../../core/constants/api_constants.dart';
-import '../../data/models/reel_model.dart';
+import '../../../data/models/reel_model.dart';
 import '../providers/reels_provider.dart';
 
 class ReelsScreen extends ConsumerStatefulWidget {

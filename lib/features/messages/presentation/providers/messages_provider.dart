@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../../core/constants/api_constants.dart';
-import '../data/models/conversation_model.dart';
-import '../data/models/message_model.dart';
+import '../../data/models/conversation_model.dart';
+import '../../data/models/message_model.dart';
 
 final _client = () => Supabase.instance.client;
 

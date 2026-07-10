@@ -7,7 +7,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../../core/constants/api_constants.dart';
 import '../../../auth/data/models/user_model.dart';
 import '../../../tweets/data/models/tweet_model.dart';
-import '../models/search_result.dart';
+import '../../data/models/search_result.dart';
 
 class SearchState {
   final String query;

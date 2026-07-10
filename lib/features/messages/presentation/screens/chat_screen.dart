@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:video_player/video_player.dart';
-import '../../data/models/message_model.dart';
+import '../../../data/models/message_model.dart';
 import '../providers/messages_provider.dart';
 
 class ChatScreen extends ConsumerStatefulWidget {
@@ -20,9 +20,9 @@ class ChatScreen extends ConsumerStatefulWidget {
   const ChatScreen({
     super.key,
     required this.conversationId,
-    required this.otherUserId,
-    required this.otherUsername,
-    required this.otherDisplayName,
+    this.otherUserId = '',
+    this.otherUsername = '',
+    this.otherDisplayName = '',
     this.otherAvatarUrl = '',
     this.otherIsVerified = false,
   });

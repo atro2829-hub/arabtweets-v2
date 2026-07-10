@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../../core/constants/api_constants.dart';
-import '../../data/models/tweet_model.dart';
+import '../../../data/models/tweet_model.dart';
 import '../providers/tweets_provider.dart';
 import 'media_grid.dart';
 

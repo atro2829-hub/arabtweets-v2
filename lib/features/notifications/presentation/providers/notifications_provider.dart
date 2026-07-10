@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../../core/constants/api_constants.dart';
-import '../data/models/notification_model.dart';
+import '../../data/models/notification_model.dart';
 
 final _client = () => Supabase.instance.client;
 

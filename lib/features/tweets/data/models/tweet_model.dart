@@ -1,4 +1,4 @@
-import '../../../../core/constants/api_constants.dart';
+import '../../../../../core/constants/api_constants.dart';
 import '../../../auth/data/models/user_model.dart';
 
 class TweetModel {

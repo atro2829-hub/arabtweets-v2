@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import '../../data/models/admin_models.dart';
+import '../../../data/models/admin_models.dart';
 
 // ─── Is Admin Provider (reads from DB!) ───────────────────────────────────
 

@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import '../data/models/user_model.dart';
+import '../../data/models/user_model.dart';
 
 final authProvider =
-    AsyncNotifierProvider<AuthNotifier, AuthState>(() => AuthNotifier());
+    NotifierProvider<AuthNotifier, AuthState>(() => AuthNotifier());
 
 final currentUserProvider = StreamProvider<User?>((ref) {
   return Supabase.instance.client.auth.onAuthStateChange.map((event) {
@@ -41,7 +41,7 @@ class AuthState {
   }
 }
 
-class AuthNotifier extends AsyncNotifier<AuthState> {
+class AuthNotifier extends Notifier<AuthState> {
   @override
   AuthState build() {
     return const AuthState();
@@ -69,7 +69,7 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
     } on PostgrestException catch (e) {
       state = AuthState(error: _translateError(e.message));
     } catch (e) {
-      state = AuthState(error: 'حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.');
+      state = const AuthState(error: 'حدث خطأ غير متوقع');
     }
   }
 
@@ -87,7 +87,7 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
     } on AuthException catch (e) {
       state = AuthState(error: _translateError(e.message));
     } catch (e) {
-      state = AuthState(error: 'حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.');
+      state = const AuthState(error: 'حدث خطأ غير متوقع');
     }
   }
 
@@ -106,7 +106,7 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
     } on AuthException catch (e) {
       state = AuthState(error: _translateError(e.message));
     } catch (e) {
-      state = AuthState(error: 'حدث خطأ في إرسال البريد. يرجى المحاولة مرة أخرى.');
+      state = const AuthState(error: 'حدث خطأ في إرسال البريد');
     }
   }
 
@@ -115,107 +115,66 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
   }
 
   void clearError() {
-    state = state.value?.copyWith(clearError: true) ?? const AuthState();
+    state = state.copyWith(clearError: true);
   }
 
-  String _translateError(String message) {
-    if (message.contains('Invalid login credentials') ||
-        message.contains('invalid credentials')) {
-      return 'البريد الإلكتروني أو كلمة المرور غير صحيحة';
-    }
-    if (message.contains('Email not confirmed')) {
-      return 'يرجى تأكيد البريد الإلكتروني أولاً';
-    }
-    if (message.contains('User already registered') ||
-        message.contains('already registered')) {
-      return 'البريد الإلكتروني مسجل مسبقاً';
-    }
-    if (message.contains('Password should be at least')) {
-      return 'كلمة المرور يجب أن تكون 8 أحرف على الأقل';
-    }
-    if (message.contains('rate limit') || message.contains('too many')) {
-      return 'تم تجاوز عدد المحاولات. يرجى الانتظار قليلاً';
-    }
-    if (message.contains('Network') || message.contains('socket')) {
-      return 'خطأ في الاتصال بالشبكة';
-    }
-    if (message.contains('duplicate') || message.contains('unique')) {
-      return 'اسم المستخدم أو البريد الإلكتروني مستخدم مسبقاً';
-    }
+  String _translateError(String? message) {
+    if (message == null) return 'حدث خطأ غير متوقع';
+    if (message.contains('Invalid login')) return 'البريد الإلكتروني أو كلمة المرور غير صحيحة';
+    if (message.contains('already registered')) return 'هذا البريد مسجل مسبقاً';
+    if (message.contains('Password should be')) return 'كلمة المرور ضعيفة جداً';
+    if (message.contains('Network')) return 'لا يوجد اتصال بالإنترنت';
     return message;
   }
 }
 
 class UserProfileNotifier extends AsyncNotifier<UserModel?> {
   @override
-  UserModel? build() {
-    _init();
-    return null;
-  }
-
-  Future<void> _init() async {
-    final user = Supabase.instance.client.auth.currentUser;
-    if (user == null) return;
-    await loadUserProfile(user.id);
-  }
-
-  Future<void> loadUserProfile(String userId) async {
-    state = const AsyncLoading();
-    try {
-      final response = await Supabase.instance.client
-          .from('profiles')
-          .select()
-          .eq('id', userId)
-          .single();
-
-      state = AsyncData(UserModel.fromJson(response));
-    } on PostgrestException catch (e) {
-      state = AsyncError(e, StackTrace.current);
-    } catch (e) {
-      state = AsyncError(e, StackTrace.current);
-    }
-  }
-
-  Future<UserModel?> getCurrentUserProfile() async {
+  Future<UserModel?> build() async {
     final user = Supabase.instance.client.auth.currentUser;
     if (user == null) return null;
+    
     try {
-      final response = await Supabase.instance.client
+      final data = await Supabase.instance.client
           .from('profiles')
           .select()
           .eq('id', user.id)
           .single();
-
-      final profile = UserModel.fromJson(response);
-      state = AsyncData(profile);
-      return profile;
+      return UserModel.fromJson(data);
     } catch (_) {
       return null;
+    }
+  }
+
+  Future<void> refreshProfile() async {
+    final user = Supabase.instance.client.auth.currentUser;
+    if (user == null) return;
+    
+    try {
+      final data = await Supabase.instance.client
+          .from('profiles')
+          .select()
+          .eq('id', user.id)
+          .single();
+      state = AsyncValue.data(UserModel.fromJson(data));
+    } catch (e) {
+      // keep current state on error
     }
   }
 
   Future<bool> isAdmin() async {
     final user = Supabase.instance.client.auth.currentUser;
     if (user == null) return false;
+    
     try {
-      final response = await Supabase.instance.client
+      final data = await Supabase.instance.client
           .from('profiles')
           .select('is_admin')
           .eq('id', user.id)
           .single();
-
-      return response['is_admin'] as bool? ?? false;
+      return data['is_admin'] as bool? ?? false;
     } catch (_) {
       return false;
     }
-  }
-
-  Future<void> refreshProfile() async {
-    final user = Supabase.instance.client.auth.currentUser;
-    if (user == null) {
-      state = const AsyncData(null);
-      return;
-    }
-    await loadUserProfile(user.id);
   }
 }

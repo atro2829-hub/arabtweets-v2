@@ -6,7 +6,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../../core/constants/api_constants.dart';
-import '../../data/models/tweet_model.dart';
+import '../../../data/models/tweet_model.dart';
 import '../providers/tweets_provider.dart';
 import '../widgets/compose_tweet_sheet.dart';
 import '../widgets/media_grid.dart';

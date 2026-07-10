@@ -256,11 +256,11 @@ class AppTheme {
         displayColor: Colors.white,
       ),
       dividerColor: const Color(0xFF2F3336),
-      cardTheme: const CardThemeData(
-        color: Color(0xFF000000),
+      cardTheme: CardThemeData(
+        color: const Color(0xFF000000),
         elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
         margin: EdgeInsets.zero,
       ),

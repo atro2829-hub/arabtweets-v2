@@ -1,5 +1,5 @@
 import '../../../auth/data/models/user_model.dart';
-import '../../../../core/constants/api_constants.dart';
+import '../../../../../core/constants/api_constants.dart';
 
 class ReelModel {
   final String id;

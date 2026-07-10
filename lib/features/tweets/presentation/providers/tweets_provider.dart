@@ -5,7 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as p;
 import 'package:uuid/uuid.dart';
 import '../../../../core/constants/api_constants.dart';
-import '../../data/models/tweet_model.dart';
+import '../../../data/models/tweet_model.dart';
 
 final _supabase = Supabase.instance.client;
 const _uuid = Uuid();

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import '../../data/models/notification_model.dart';
+import '../../../data/models/notification_model.dart';
 
 class NotificationCard extends StatelessWidget {
   final NotificationModel notification;
